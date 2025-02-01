@@ -1,0 +1,30 @@
+﻿@model NotificationsApp.Models.Notification
+
+<h2>Send Notification</h2>
+
+<form asp-action="SendNotification" method="post">
+    <div class="form-group">
+        <label for="Type">Type (Email/SMS)</label>
+        <input type="text" name="Type" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="Recipient">Recipient</label>
+        <input type="text" name="Recipient" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label for="Message">Message</label>
+        <textarea name="Message" class="form-control"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Send</button>
+</form>
+
+@if (ViewBag.FormattedMessage != null)
+{
+    <div class="alert alert-success mt-3">
+        <strong>Formatted Message:</strong> @ViewBag.FormattedMessage
+    </div>
+    <div class="alert alert-info mt-3">
+        <strong>Log:</strong> @ViewBag.Logger
+    </div>
+}
+
