@@ -55,3 +55,18 @@ jobs:
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_102976B526A6486682501A28FEF9D4F1 }}
           package: .
+
+  swap:
+    runs-on: windows-latest
+    needs: deploy
+    steps:
+      - name: Swap Staging to Production
+        uses: azure/CLI@v1
+        with:
+          azcliversion: latest
+          inlineScript: |
+            az webapp deployment slot swap \
+              --resource-group rameshwara.yellepeddi-ResourceGroup \
+              --name NotificationsApp \
+              --slot stagingenv \
+              --target-slot production
